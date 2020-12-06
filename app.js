@@ -5,10 +5,11 @@ const morgan = require('morgan')
 const cors = require('cors')
 require('colors')
 
-const adminData = require('./routes/admin.js')
-const shopRouter = require('./routes/shop.js')
-
 const server = express()
+
+const adminRouter = require('./routes/admin.js')
+const shopRouter = require('./routes/shop.js')
+const errorsController = require('./controllers/errors.js')
 
 server.set('view engine', 'ejs')
 server.set('views', 'views')
@@ -20,12 +21,10 @@ server.use(express.json())
 server.use(express.urlencoded({ extended: true }))
 server.use(express.static(path.join(__dirname, 'public')))
 
-server.use('/admin', adminData.routes)
+server.use('/admin', adminRouter)
 server.use(shopRouter)
 
-server.use((req, res) => {
-  res.status(404).render('404', { pageTitle: '404 Page Not Found' })
-})
+server.use(errorsController.get404Page)
 
 const PORT = process.env.PORT || 4555
 

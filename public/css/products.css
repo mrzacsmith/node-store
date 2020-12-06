@@ -5,6 +5,8 @@
 }
 
 .product-item {
+  border-radius: 8px;
+  margin-top: 0.5rem;
   width: 20rem;
   max-width: 95%;
 }
