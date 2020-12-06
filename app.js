@@ -1,3 +1,4 @@
+const path = require('path')
 const express = require('express')
 const helmet = require('helmet')
 const morgan = require('morgan')
@@ -14,12 +15,13 @@ server.use(morgan('dev'))
 server.use(cors())
 server.use(express.json())
 server.use(express.urlencoded({ extended: true }))
+server.use(express.static(path.join(__dirname, 'public')))
 
 server.use('/admin', adminRouter)
 server.use(shopRouter)
 
 server.use((req, res) => {
-  res.status(404).send('<h2>This is not the page you are looking for!</h2>')
+  res.status(404).sendFile(path.join(__dirname, 'views', '404.html'))
 })
 
 const PORT = process.env.PORT || 4555
