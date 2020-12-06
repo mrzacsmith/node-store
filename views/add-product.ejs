@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+  <%- include('partial/head.ejs') %>
+  <link rel="stylesheet" href="/css/products.css">
+  <link rel="stylesheet" href="/css/forms.css">
+  </head>
+  <body>
+    <%- include('partial/nav.ejs') %>
+
+    <main>
+      <form class="add-form" action="/admin/product" method="POST">
+        <div class="form-control">
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title" />
+        </div>
+        <button type="submit">add product</button>
+      </form>
+    </main>
+  <%- include('partial/end.ejs') %>
