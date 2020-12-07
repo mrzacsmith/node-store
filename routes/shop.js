@@ -8,6 +8,8 @@ router.get('/', shopController.getIndexPage)
 
 router.get('/products', shopController.getProducts)
 
+router.get('/products/:id', shopController.getProductById)
+
 router.get('/cart', shopController.getCart)
 
 router.get('/orders', shopController.getOrders)

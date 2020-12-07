@@ -1,3 +1,4 @@
+const { timeStamp } = require('console')
 const fs = require('fs')
 const path = require('path')
 
@@ -6,6 +7,11 @@ const p = path.join(
   'data',
   'products.json'
 )
+
+const random = (num) => {
+  return Math.floor(Math.random() * Math.floor(num))
+}
+
 const getProductsFile = (cb) => {
   fs.readFile(p, (err, fileContent) => {
     if (err) {
@@ -23,6 +29,7 @@ module.exports = class Product {
     this.price = price
   }
   save() {
+    this.id = random(10000000)
     getProductsFile((products) => {
       products.push(this)
       fs.writeFile(p, JSON.stringify(products), (err) => {

@@ -23,6 +23,11 @@ exports.getProducts = (req, res) => {
   })
 }
 
+exports.getProductById = (req, res) => {
+  const id = req.params.id
+  res.redirect('/')
+}
+
 //res.cloudinary.com/devsec/image/upload/v1607304780/beard1_psuw0p.jpg
 
 https: exports.getCart = (req, res) => {
