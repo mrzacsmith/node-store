@@ -17,7 +17,8 @@ server.use(
   helmet.contentSecurityPolicy({
     directives: {
       ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-      'img-src': ['*'],
+      // 'img-src': ['*'],
+      'img-src': ["'self'", '*.cloudinary.com'],
     },
   })
 )

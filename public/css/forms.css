@@ -7,14 +7,21 @@
   margin: 1rem 0;
 }
 .form-control label,
-.form-control input {
+.form-control input,
+.form-control textarea {
   display: block;
   width: 100%;
+  padding: 0.4rem;
 }
-.form-control input {
+.form-control input,
+.form-control textarea {
   border: 1px solid goldenrod;
   font: inherit;
   border-radius: 2px;
+}
+.form-control input:focus,
+.form-control textarea:focus {
+  outline-color: rgb(86, 10, 131);
 }
 button {
   font: inherit;
