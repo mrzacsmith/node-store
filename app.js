@@ -13,8 +13,14 @@ const errorsController = require('./controllers/errors.js')
 
 server.set('view engine', 'ejs')
 server.set('views', 'views')
-
-server.use(helmet())
+server.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      'img-src': ['*'],
+    },
+  })
+)
 server.use(morgan('dev'))
 server.use(cors())
 server.use(express.json())
@@ -31,3 +37,5 @@ const PORT = process.env.PORT || 4555
 server.listen(PORT, () => {
   console.log(`\n** Server is running on port ${PORT}`.america)
 })
+
+// server.set('Content-Security-Policy', "default-src 'self'; img-src 'self' data")
