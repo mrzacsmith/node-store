@@ -11,8 +11,6 @@ exports.getIndexPage = (req, res) => {
 }
 
 exports.getProducts = (req, res) => {
-  // req.headers['Content-Security-Policy'] =
-  //   "img-src https://res.cloudinary.com/* 'self';"
   console.log('header', req.headers)
   Product.fetchAll((products) => {
     res.render('shop/index', {
@@ -24,13 +22,18 @@ exports.getProducts = (req, res) => {
 }
 
 exports.getProductById = (req, res) => {
-  const id = req.params.id
-  res.redirect('/')
+  const prodId = req.params.id
+  Product.findById(prodId, (product) => {
+    product = product[0]
+    res.render('shop/product-detail', {
+      product: product,
+      pageTitle: product.title,
+      path: '/products',
+    })
+  })
 }
 
-//res.cloudinary.com/devsec/image/upload/v1607304780/beard1_psuw0p.jpg
-
-https: exports.getCart = (req, res) => {
+exports.getCart = (req, res) => {
   res.render('shop/cart', {
     pageTitle: 'Shopping Cart',
     path: '/cart',

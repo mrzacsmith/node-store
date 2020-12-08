@@ -2,4 +2,12 @@
 </head>
 <body>
   <%- include('../partial/nav.ejs') %>
+  <main class="center">
+    <h1><%= product.title %></h1>
+    <div>
+      <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+    </div>
+    <h2><%= product.price %></h2>
+    <p><%= product.description %></p>
+  </main>
   <%- include('../partial/end.ejs') %>
