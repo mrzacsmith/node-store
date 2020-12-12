@@ -4,6 +4,7 @@ exports.getAddProductPage = (req, res) => {
   res.render('admin/edit-product', {
     pageTitle: 'Add Products',
     path: '/admin/add-product',
+    editing: false,
   })
 }
 
@@ -12,7 +13,7 @@ exports.getProducts = (req, res) => {
 
   Product.fetchAll((products) => {
     res.render('admin/products', {
-      pageTitle: 'Admin Products',
+      pageTitle: 'Admin Product',
       prods: products,
       path: '/admin/products',
     })
@@ -22,10 +23,16 @@ exports.getProducts = (req, res) => {
 exports.getEditProductPage = (req, res) => {
   const editMode = req.query.edit
   if (!editMode) res.redirect('/')
-  res.render('admin/edit-product', {
-    pageTitle: 'Add Products',
-    path: '/admin/add-product',
-    editing: editMode,
+
+  const prodId = req.params.id
+  Product.findById(prodId, (product) => {
+    if (!product) res.redirect('/')
+    res.render('admin/edit-product', {
+      pageTitle: 'Edit Product',
+      path: '/admin/edit-product',
+      editing: editMode,
+      product: product,
+    })
   })
 }
 

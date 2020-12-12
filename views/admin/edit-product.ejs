@@ -6,25 +6,25 @@
   <%- include('../partial/nav.ejs') %>
 
   <main>
-    <form class="add-form" action="/admin/product" method="POST">
+    <form class="add-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>product<% } %>" method="POST">
       <div class="form-control">
         <label for="title">Title</label>
-        <input type="text" name="title" id="title" />
+        <input type="text" name="title" id="title" value="<% if (editing) {  %><%= product[0].title %> <% } %>" />
       </div>
       <div class="form-control">
         <label for="imageUrl">Image URL</label>
-        <input type="text" name="imageUrl" id="imageUrl" />
+        <input type="text" name="imageUrl" id="imageUrl" value="<% if (editing) { %><%= product[0].imageUrl %> <% } %>" />
       </div>
       <div class="form-control">
         <label for="price">Price</label>
-        <input type="number" name="price" id="price" step="0.01" />
+        <input type="number" name="price" id="price" step="0.01" value="<% if (editing) { %><%= product[0].price %> <% } %>" />
       </div>
       <div class="form-control">
         <label for="description">Description</label>
-        <textarea rows='5' name="description" id="description" ></textarea>
+        <textarea rows='5' name="description" id="description"><% if (editing) { %><%= product[0].description %> <% } %>"</textarea>
 
       </div>
-      <button class="btn btn-size" type="submit">add product</button>
+      <button class="btn btn-size" type="submit"><% if (editing) { %> edit product <% } else { %> add product <% } %></button>
     </form>
   </main>
 <%- include('../partial/end.ejs') %>
