@@ -1,7 +1,7 @@
 const Product = require('../models/product.js')
 
 exports.getAddProductPage = (req, res) => {
-  res.render('admin/add-product', {
+  res.render('admin/edit-product', {
     pageTitle: 'Add Products',
     path: '/admin/add-product',
   })
@@ -16,6 +16,16 @@ exports.getProducts = (req, res) => {
       prods: products,
       path: '/admin/products',
     })
+  })
+}
+
+exports.getEditProductPage = (req, res) => {
+  const editMode = req.query.edit
+  if (!editMode) res.redirect('/')
+  res.render('admin/edit-product', {
+    pageTitle: 'Add Products',
+    path: '/admin/add-product',
+    editing: editMode,
   })
 }
 
