@@ -21,19 +21,32 @@ const getProductInfo = (cb) => {
 }
 
 module.exports = class Product {
-  constructor(title, imageUrl, description, price) {
+  constructor(id, title, imageUrl, description, price) {
+    this.id = id
     this.title = title
     this.imageUrl = imageUrl
     this.description = description
     this.price = price
   }
   save() {
-    this.id = random(10000000)
     getProductInfo((products) => {
-      products.push(this)
-      fs.writeFile(p, JSON.stringify(products), (err) => {
-        console.log(err)
-      })
+      if (this.id) {
+        const existingProductIndex = product.findIndex(
+          (prod) => prod.id === this.id
+        )
+        const updatedProducts = [...products]
+        updatedProducts[existingProductIndex] = this
+
+        fs.writeFile(p, JSON.stringify(products), (err) => {
+          console.log(err)
+        })
+      } else {
+        this.id = random(10000000)
+        products.push(this)
+        fs.writeFile(p, JSON.stringify(products), (err) => {
+          console.log(err)
+        })
+      }
     })
   }
   static fetchAll(cb) {

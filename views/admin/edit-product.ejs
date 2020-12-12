@@ -22,8 +22,10 @@
       <div class="form-control">
         <label for="description">Description</label>
         <textarea rows='5' name="description" id="description"><% if (editing) { %><%= product[0].description %> <% } %>"</textarea>
-
       </div>
+      <% if (editing) { %> 
+        <input type="hidden" name="productId" value="<%= product.id %>">
+      <% } %>
       <button class="btn btn-size" type="submit"><% if (editing) { %> edit product <% } else { %> add product <% } %></button>
     </form>
   </main>
